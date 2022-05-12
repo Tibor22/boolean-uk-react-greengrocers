@@ -3,9 +3,20 @@ export default function StoreItem({
   setCartItems,
   setTotal,
   total,
-  type
+  setUrl,
+  setCurrItem,
+  setImageUrl
 }) {
   const addToCart = newItem => {
+    setUrl(
+      `https://fit-life-food.p.rapidapi.com/nutrition/${
+        newItem.name === 'eggplant' ? 'aubergine' : newItem.name
+      }`
+    )
+    setCurrItem(newItem.name)
+    setImageUrl(
+      `https://api.unsplash.com/search/photos/?client_id=uhytsXNkP4woKLLbRMg-y7S_mMAR4hWBtvn3ut2a49k&query=${newItem.name}`
+    )
     setCartItems(prevArray => {
       if (prevArray?.some(item => item.id === newItem.id)) return prevArray
       setTotal(total + item.price)

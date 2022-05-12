@@ -1,5 +1,6 @@
 import './styles/reset.css'
 import './styles/index.css'
+import './styles/details.css'
 
 import initialStoreItems from './store-items'
 import StoreItems from './StoreItems'
@@ -30,13 +31,11 @@ export default function App() {
   const [total, setTotal] = useState(0)
   const [type, setType] = useState('all')
   const [sort, setSort] = useState()
-  const [url, setUrl] = useState(
-    'https://fit-life-food.p.rapidapi.com/nutrition/apple'
-  )
-
-  const { error, isPending, data } = useFetch(url)
-
-  console.log(data)
+  const [currItem, setCurrItem] = useState('')
+  const [url, setUrl] = useState()
+  const [imageUrl, setImageUrl] = useState()
+  const { data } = useFetch(url)
+  const { data: image } = useFetch(imageUrl)
 
   return (
     <>
@@ -64,6 +63,9 @@ export default function App() {
             storeItems={storeItems}
             total={total}
             type={type}
+            setUrl={setUrl}
+            setCurrItem={setCurrItem}
+            setImageUrl={setImageUrl}
           />
         </ul>
       </header>
@@ -106,15 +108,23 @@ export default function App() {
             </select>
           </label>
         </form>
-        <div className="detail">
-          <h2>Some heading</h2>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
-            similique dolore laborum eos porro quod veniam eaque molestias
-            consequatur sapiente laudantium asperiores ducimus sint est ipsam, a
-            qui. Veniam, eaque?
-          </p>
-          <img src="" alt="" />
+        <div className="details">
+          <div className="details-heading">
+            <h2>{currItem.toUpperCase()}</h2>
+
+            {image && <img src={image.results[0].urls.raw} alt="" />}
+          </div>
+
+          <ul className="details-container">
+            {data &&
+              Object.keys(data).map(obj => {
+                return (
+                  <li>
+                    {obj} {data[obj]}
+                  </li>
+                )
+              })}
+          </ul>
         </div>
       </main>
 
@@ -134,3 +144,5 @@ export default function App() {
     </>
   )
 }
+// API KEY: uhytsXNkP4woKLLbRMg-y7S_mMAR4hWBtvn3ut2a49k
+// secret key:hP97jiK3Mn-W8MJIyFKmlySZJ3VrLy60UjvHyowxqBg

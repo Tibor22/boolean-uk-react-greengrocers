@@ -31,13 +31,13 @@ const storeItems = [
   },
   {
     id: '006-bananas',
-    name: 'bananas',
+    name: 'banana',
     price: 0.35,
     type: 'fruit'
   },
   {
     id: '007-bell-pepper',
-    name: 'bell pepper',
+    name: 'bell peppers',
     price: 0.35,
     type: 'vegetable'
   },

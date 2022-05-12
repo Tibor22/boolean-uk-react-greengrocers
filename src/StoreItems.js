@@ -6,7 +6,10 @@ export default function StoreItems({
   cartItems,
   setTotal,
   total,
-  type
+  type,
+  setUrl,
+  setCurrItem,
+  setImageUrl
 }) {
   return (
     <>
@@ -21,6 +24,9 @@ export default function StoreItems({
               setTotal={setTotal}
               total={total}
               type={type}
+              setUrl={setUrl}
+              setCurrItem={setCurrItem}
+              setImageUrl={setImageUrl}
             />
           )
         )
