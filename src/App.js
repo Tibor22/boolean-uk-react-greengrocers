@@ -5,7 +5,7 @@ import './styles/details.css'
 import initialStoreItems from './store-items'
 import StoreItems from './StoreItems'
 import Cart from './Cart'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useFetch } from './useFetch'
 
 /*
@@ -36,6 +36,19 @@ export default function App() {
   const [imageUrl, setImageUrl] = useState()
   const { data } = useFetch(url)
   const { data: image } = useFetch(imageUrl)
+
+  useEffect(() => {
+    if (currItem) {
+      setImageUrl(
+        `https://api.unsplash.com/search/photos/?client_id=uhytsXNkP4woKLLbRMg-y7S_mMAR4hWBtvn3ut2a49k&query=${currItem}`
+      )
+      setUrl(
+        `https://fit-life-food.p.rapidapi.com/nutrition/${
+          currItem === 'eggplant' ? 'aubergine' : currItem
+        }`
+      )
+    }
+  }, [currItem])
 
   return (
     <>
